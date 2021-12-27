@@ -1,6 +1,6 @@
 import React from "react";
 import { RootStateOrAny, useSelector } from "react-redux";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const FullScreenPage: React.FC = () => {
   const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
