@@ -16,9 +16,9 @@ const GradientCard: React.FC = () => {
   const filter = useSelector((state: RootState) => state.filterTag.tags);
   const list = filterByTag(data, filter, "All");
   return (
-    <ul className="space-y-5">
+    <ul className="gap-3 sm:grid sm:grid-cols-2 xl:grid-cols-4 mt-5">
       {list.map((el: Elem) => (
-        <li className="border p-5 shadow-lg" key={el.id}>
+        <li className="border p-5 shadow-lg my-2 " key={el.id}>
           <GradientCardList
             name={el.name}
             colorStart={el.start}

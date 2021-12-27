@@ -6,9 +6,14 @@ interface Props {
 
 const FullScreenButton: React.FC<Props> = ({ id }) => {
   return (
-    <div className="border border-black rounded text-center mt-3 p-1">
-      <NavLink to={`/gradient/${id}`}>Full Screen</NavLink>
-    </div>
+    <NavLink to={`/gradient/${id}`}>
+      <button
+        type="button"
+        className="w-full border border-black rounded text-center mt-3 p-1"
+      >
+        Full Screen
+      </button>
+    </NavLink>
   );
 };
 

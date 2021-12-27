@@ -17,8 +17,10 @@ const GradientHeader: React.FC<ChangeColor> = ({
 }) => {
   return (
     <div className="text-center text-white py-10 w-full" style={style}>
-      <h1 className="text-6xl pb-2">Gradient</h1>
-      <p>Ultime collection des plus beaux dégradés</p>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl pb-2">Gradient</h1>
+      <p className="sm:text-xl md:text-2xl lg:text-3xl">
+        Ultime collection de dégradés
+      </p>
       <div className="pt-4">
         <button
           className="border-white border w-10 h-10 mr-2 rounded"

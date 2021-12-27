@@ -1,26 +1,56 @@
-import React from "react";
-import { RootStateOrAny, useSelector } from "react-redux";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { RootState } from "../../../redux/app/store";
+import {
+  setData,
+  setError,
+  setLoading,
+} from "../../../redux/features/data/dataSlice";
+import Loading from "../Loading";
 
 const FullScreenPage: React.FC = () => {
   const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
+  const loading = useSelector(
+    (state: RootState) => state.loadDataSlice.loading
+  );
   const { id } = useParams() as any;
   const style = {
     backgroundImage: `linear-gradient(to right, ${data[id - 1]?.start}, ${
       data[id - 1]?.end
     })`,
   };
-  const datas = data[id - 1]?.name;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLoading(loading));
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          "https://gradients-api.herokuapp.com/gradients"
+        );
+        dispatch(setData(result.data));
+      } catch (error: any) {
+        dispatch(setError(error.message));
+      }
+    };
+    fetchData();
+  }, [dispatch, loading]);
+
   return (
     <>
-      {id < 26 ? (
-        <div style={style} className="min-h-screen p-2">
-          <button className="bg-black text-white px-3 py-1 mr-1">
+      {loading ? (
+        <span className="flex items-center h-screen">
+          <Loading />
+        </span>
+      ) : id < 26 ? (
+        <div style={style} className=" h-screen p-2">
+          <button className="bg-black text-white px-3 py-1 mr-1 rounded">
             <Link to="/">Home</Link>
           </button>
 
-          <div className="flex flex-col justify-center items-center h-screen">
-            <h1 className="text-4xl">{datas}</h1>
+          <div className="flex flex-col justify-center items-center h-full">
+            <h1 className="text-4xl">{data[id - 1]?.name}</h1>
             <code className="text-center bg-white mt-5">
               {`backgroundImage: linear-gradient(to right, ${
                 data[id - 1]?.start
@@ -28,12 +58,14 @@ const FullScreenPage: React.FC = () => {
               , ${data[id - 1]?.end})`}
             </code>
             <div className="mt-5">
-              <button
-                className="bg-black text-white px-3 py-1 mr-1  rounded"
-                disabled={true}
-              >
-                <Link to={`/gradient/${Number(id) - 1}`}>Previous</Link>
-              </button>
+              {id > 1 && (
+                <button
+                  className="bg-black text-white px-3 py-1 mr-1  rounded"
+                  disabled={true}
+                >
+                  <Link to={`/gradient/${Number(id) - 1}`}>Previous</Link>
+                </button>
+              )}
 
               {id < 25 && (
                 <button className="bg-black text-white px-3 py-1  rounded">

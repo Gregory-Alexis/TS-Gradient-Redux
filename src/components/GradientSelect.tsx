@@ -9,15 +9,25 @@ const GradientSelect: React.FC = () => {
   const uniqueTags: string[] = allTags(data);
 
   return (
-    <select
-      className="border w-full rounded mb-5 p-2"
-      onChange={(e) => dispatch(setFilter(e.target.value))}
-    >
-      <option value="All">Tous</option>
-      {uniqueTags.map((el) => (
-        <option key={el}>{el}</option>
-      ))}
-    </select>
+    <div className="flex justify-center items-center ">
+      <label
+        className="border-2 text-xl bg-gray-200 p-2 rounded-l-md"
+        htmlFor="select"
+      >
+        Filtre
+      </label>
+      <select
+        className="rounded-r-md p-3 outline-none w-full bg-white border xl:w-3/6"
+        onChange={(e) => dispatch(setFilter(e.target.value))}
+        id="select"
+      >
+        <option value="All">Tous</option>
+
+        {uniqueTags.map((el) => (
+          <option key={el}>{el}</option>
+        ))}
+      </select>
+    </div>
   );
 };
 
