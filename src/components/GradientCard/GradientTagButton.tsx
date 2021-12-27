@@ -20,6 +20,7 @@ const GradientTagButton: React.FC<Props> = ({ tags }) => {
           value={filter}
           onClick={() => dispatch(setFilter(el))}
           key={el}
+          disabled={filter === el}
         >
           {el}
         </button>

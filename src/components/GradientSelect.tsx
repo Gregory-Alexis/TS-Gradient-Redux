@@ -1,12 +1,13 @@
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import allTags from "../fonctions/allTags";
+import { AppDispatch } from "../redux/app/store";
 import { setFilter } from "../redux/features/filterTag/filterTagSlice";
 
-const GradientSelect = () => {
+const GradientSelect: React.FC = () => {
   const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const uniqueTags: string[] = allTags(data);
+
   return (
     <select
       className="border w-full rounded mb-5 p-2"
