@@ -17,7 +17,7 @@ const FullScreenPage: React.FC = () => {
   );
   const { id } = useParams() as any;
   const style = {
-    backgroundImage: `linear-gradient(to right, ${data[id - 1]?.start}, ${
+    background: `linear-gradient(to right, ${data[id - 1]?.start}, ${
       data[id - 1]?.end
     })`,
   };
@@ -39,19 +39,18 @@ const FullScreenPage: React.FC = () => {
 
   return (
     <>
-      {loading ? (
-        <span className="flex items-center h-screen">
-          <Loading />
-        </span>
-      ) : id < 26 ? (
-        <div style={style} className=" h-screen p-2">
-          <button className="bg-black text-white px-3 py-1 mr-1 rounded">
+      {id < 26 ? (
+        <div className=" h-screen bg-cover" style={style}>
+          <button className="bg-black text-white px-3 py-1 mr-1 rounded m-2">
             <Link to="/">Home</Link>
           </button>
 
-          <div className="flex flex-col justify-center items-center h-full">
+          <div
+            className="flex flex-col justify-center items-center h-full"
+            style={style}
+          >
             <h1 className="text-4xl">{data[id - 1]?.name}</h1>
-            <code className="text-center bg-white mt-5">
+            <code className="text-center bg-white mt-5 rounded p-1">
               {`backgroundImage: linear-gradient(to right, ${
                 data[id - 1]?.start
               }
