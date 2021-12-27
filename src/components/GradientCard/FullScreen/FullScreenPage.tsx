@@ -46,7 +46,20 @@ const FullScreenPage: React.FC = () => {
           <button className="bg-black text-white px-3 py-1 mr-1 rounded m-2">
             <Link to="/">Home</Link>
           </button>
+          {id > 1 && (
+            <button
+              className="bg-black text-white px-3 py-1 mr-1 rounded"
+              disabled={true}
+            >
+              <Link to={`/gradient/${Number(id) - 1}`}>Previous</Link>
+            </button>
+          )}
 
+          {id < 25 && (
+            <button className="bg-black text-white px-3 py-1 rounded">
+              <Link to={`/gradient/${Number(id) + 1}`}>Next</Link>
+            </button>
+          )}
           <div
             className="flex flex-col justify-center items-center h-full"
             style={style}
@@ -58,22 +71,6 @@ const FullScreenPage: React.FC = () => {
               }
               , ${data[id - 1]?.end})`}
             </code>
-            <div className="mt-5">
-              {id > 1 && (
-                <button
-                  className="bg-black text-white px-3 py-1 mr-1  rounded"
-                  disabled={true}
-                >
-                  <Link to={`/gradient/${Number(id) - 1}`}>Previous</Link>
-                </button>
-              )}
-
-              {id < 25 && (
-                <button className="bg-black text-white px-3 py-1  rounded">
-                  <Link to={`/gradient/${Number(id) + 1}`}>Next</Link>
-                </button>
-              )}
-            </div>
           </div>
         </div>
       ) : (
