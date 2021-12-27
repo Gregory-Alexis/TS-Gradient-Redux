@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { store } from "./redux/app/store";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FullScreenPage from "./components/GradientCard/FullScreen/FullScreenPage";
-import ErrorPage from "./components/GradientCard/FullScreen/ErrorPage";
 
 ReactDOM.render(
   <BrowserRouter>
