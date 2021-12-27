@@ -17,7 +17,7 @@ const FullScreenPage: React.FC = () => {
   );
   const { id } = useParams() as any;
   const style = {
-    background: `linear-gradient(to right, ${data[id - 1]?.start}, ${
+    backgroundImage: `linear-gradient(to right, ${data[id - 1]?.start}, ${
       data[id - 1]?.end
     })`,
   };
@@ -39,8 +39,10 @@ const FullScreenPage: React.FC = () => {
 
   return (
     <>
-      {id < 26 ? (
-        <div className=" h-screen bg-cover" style={style}>
+      {loading ? (
+        <Loading />
+      ) : id < 26 ? (
+        <div style={style} className=" h-screen ">
           <button className="bg-black text-white px-3 py-1 mr-1 rounded m-2">
             <Link to="/">Home</Link>
           </button>
