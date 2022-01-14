@@ -8,6 +8,22 @@
 
 Site listant différent gradients de couleur avec un extrait et leur code couleur.
 
+- [Installation](https://github.com/Westindiess/TS-Gradient-Redux#installation)
+- [Redux](https://github.com/Westindiess/TS-Gradient-Redux#redux)
+  - [Store](https://github.com/Westindiess/TS-Gradient-Redux#store)
+  - [Slice](https://github.com/Westindiess/TS-Gradient-Redux#slice)
+    - [dataSlice](https://github.com/Westindiess/TS-Gradient-Redux#dataSlice)
+    - [filterTagSlice](https://github.com/Westindiess/TS-Gradient-Redux#filterTagSlice)
+- [Fonctions](https://github.com/Westindiess/TS-Gradient-Redux#fonctions)
+  - [allTags](https://github.com/Westindiess/TS-Gradient-Redux#allTags)
+  - [filterByTags](https://github.com/Westindiess/TS-Gradient-Redux#filterByTags)
+- [Composants](https://github.com/Westindiess/TS-Gradient-Redux#composants)
+  - [App](https://github.com/Westindiess/TS-Gradient-Redux#app)
+  - [GradientCard](https://github.com/Westindiess/TS-Gradient-Redux#GradientCard)
+  - [GradientCardList](https://github.com/Westindiess/TS-Gradient-Redux#GradientCardList)
+  - [GradientSelect](https://github.com/Westindiess/TS-Gradient-Redux#GradientSelect)
+  - [GradientHeader](https://github.com/Westindiess/TS-Gradient-Redux#GradientHeader)
+
 ## Installation
 
 ```
@@ -116,7 +132,7 @@ export const { setFilter } = filterTagSlice.actions;
 export default filterTagSlice.reducer;
 ```
 
-Mise en place de l'action:
+Mise en place de l'action avec `createSlice`
 
 - **setFilter** filtre les cards par leurs tags de couleur
 
@@ -153,10 +169,10 @@ Création d'une fonction `allTags` qui prend en paramètre un tableau.
 Itération sur le tableau `list`.
 Récupèration de tout les tags de ce tableau pour chaque élément.
 
-On applique ensuite au tableau `listTag` le méthode `concat`.
-Les tags sont contenu dans des tableaux, donc appliquant cette méthode, on récupère tout les tags dans un seul et même tableau
+On applique ensuite au tableau `listTag` le méthode `concat` pour chaque tag.
+Les tags sont contenu dans des tableaux, donc en appliquant cette méthode, on récupère tout les tags dans un seul et même tableau
 
-Le tableau `uniqueTagList` sera un tableau qui contiendra chaque couleurs en 1 exemplaire.
+Le tableau `uniqueTagList` sera un tableau qui contiendra chaque couleurs en 1 fois.
 Pour ce faire, on itérera sur `listTag` avec une boucle.
 On applique ensuite la méthode `push` à `uniqueTagList` seulement s'il ne contient pas déjà l'élément en question, puis on le retourne.
 
@@ -267,7 +283,7 @@ Gestion du chargement de la page et des éventuelles erreurs.
 
 Initialisation de le fonction **ChooseGradient** qui permet de récupérer un nombre aléatoire entre 0 et le nombre d'élément contenu dans data.
 
-La variable `randomGradient` à pour valeur initial `chooseGradient` ( un nombre aléatoire ).  
+La variable `randomGradient` à pour valeur initiale `chooseGradient` ( un nombre aléatoire ).  
 Chaque fois que la page sera mise à jour ou qu'on clique sur le boutton, une couleur sera affiché ( **_grâce à la fonction `handleReloadClick`_** ) en tant que **backgroundColor** du Header qui dépendra du numéro aléatoire.
 
 Les fonctions `handleNextClick` et `handlePreviousClick` permettent de choisir respectivement la couleur suivante ou précédente.
