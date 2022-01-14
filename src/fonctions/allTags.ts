@@ -1,7 +1,7 @@
-const allTags = (list: any[]) => {
+const allTags = (array: any[]) => {
   let listTag: string[] = [];
-  for (let element of list) {
-    if (list.includes(element)) {
+  for (let element of array) {
+    if (array.includes(element)) {
       listTag = listTag.concat(element.tags);
     }
   }
