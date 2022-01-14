@@ -7,7 +7,6 @@ import GradientCard from "./components/GradientCard/GradientCard";
 import GradientSelect from "./components/GradientSelect";
 import { AppDispatch, RootState } from "./redux/app/store";
 import { setData, setLoading, setError } from "./redux/features/data/dataSlice";
-import { useParams } from "react-router-dom";
 import Loading from "./components/GradientCard/Loading";
 
 const App = () => {
@@ -24,7 +23,7 @@ const App = () => {
   const style = {
     backgroundImage: `linear-gradient(to right, ${data[randomGradient]?.start}, ${data[randomGradient]?.end})`,
   };
-  const { id } = useParams as any;
+
   useEffect(() => {
     dispatch(setLoading(loading));
     const fetchData = async () => {
@@ -32,14 +31,14 @@ const App = () => {
         const result = await axios.get(
           `https://gradients-api.herokuapp.com/gradients`
         );
-
+        console.log(typeof result.data);
         dispatch(setData(result.data));
       } catch (error: any) {
         dispatch(setError(error.message));
       }
     };
     fetchData();
-  }, [dispatch, loading, id]);
+  }, [dispatch, loading]);
 
   const handleReloadClick = () => {
     setRandomGradient(chooseGradient);
