@@ -8,6 +8,8 @@ const GradientSelect: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const uniqueTags: string[] = allTags(data);
 
+  console.log(uniqueTags);
+
   return (
     <div className="flex justify-center items-center ">
       <label
