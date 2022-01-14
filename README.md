@@ -19,10 +19,10 @@ Site listant différent gradients de couleur avec un extrait et leur code couleu
   - [filterByTags](https://github.com/Westindiess/TS-Gradient-Redux#filterByTags)
 - [Composants](https://github.com/Westindiess/TS-Gradient-Redux#composants)
   - [App](https://github.com/Westindiess/TS-Gradient-Redux#app)
+  - [GradientHeader](https://github.com/Westindiess/TS-Gradient-Redux#GradientHeader)
+  - [GradientSelect](https://github.com/Westindiess/TS-Gradient-Redux#GradientSelect)
   - [GradientCard](https://github.com/Westindiess/TS-Gradient-Redux#GradientCard)
   - [GradientCardList](https://github.com/Westindiess/TS-Gradient-Redux#GradientCardList)
-  - [GradientSelect](https://github.com/Westindiess/TS-Gradient-Redux#GradientSelect)
-  - [GradientHeader](https://github.com/Westindiess/TS-Gradient-Redux#GradientHeader)
 
 ## Installation
 
@@ -290,6 +290,95 @@ Les fonctions `handleNextClick` et `handlePreviousClick` permettent de choisir r
 
 Initialisation des variable **data** et **filter** auxquelles sont affecté une fonction ( `Selector` ) qui prend en paramètre leur state initial respectif déclarer dans redux.
 
+## GradientHeader
+
+```js
+// components/GradientHeader.tsx
+
+interface ChangeColor {
+  style: {};
+  handleReloadClick: () => void;
+  handleNextClick: () => void;
+  handlePrevClick: () => void;
+}
+
+const GradientHeader: React.FC<ChangeColor> = ({
+  style,
+  handleReloadClick,
+  handleNextClick,
+  handlePrevClick,
+}) => {
+  return (
+    <div className="text-center text-white py-10 w-full" style={style}>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl pb-2">Gradient</h1>
+      <p className="sm:text-xl md:text-2xl lg:text-3xl">
+        Ultime collection de dégradés
+      </p>
+      <div className="pt-4">
+        <button
+          className="border-white border w-10 h-10 mr-2 rounded"
+          onClick={handlePrevClick}
+        >
+          <img src={arrowLeft} alt="fleche gauche" className="m-auto" />
+        </button>
+        <button
+          className="border-white border w-10 h-10 mr-2 rounded"
+          onClick={handleReloadClick}
+        >
+          <img src={ClockWise} alt="fleche random" className="m-auto" />
+        </button>
+        <button
+          className="border-white border w-10 h-10 rounded"
+          onClick={handleNextClick}
+        >
+          <img src={arrowRight} alt="fleche droite" className="m-auto" />
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+![Header](src/images/header.png)
+
+## GradientSelect
+
+```js
+// components/GradientSelect.tsx
+
+const GradientSelect: React.FC = () => {
+
+  const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
+  const dispatch = useDispatch<AppDispatch>();
+  const uniqueTags: string[] = allTags(data);
+
+  return (
+    <div className="flex justify-center items-center ">
+      <label
+        className="border-2 text-xl bg-gray-200 p-2 rounded-l-md"
+        htmlFor="select"
+      >
+        Filtre
+      </label>
+      <select
+        className="rounded-r-md p-3 outline-none w-full bg-white border xl:w-3/6"
+        onChange={(e) => dispatch(setFilter(e.target.value))}
+        id="select"
+      >
+        <option value="All">Tous</option>
+        {uniqueTags.map((el) => (
+          <option key={el}>{el}</option>
+        ))}
+      </select>
+    </div>
+  );
+};
+```
+
+Itération sur le tableau de tags de couleur puis affichage dans le form-select.
+
+![Form-Select](src/images/Form-Select.png)
+
 ## GradientCard
 
 ```js
@@ -355,96 +444,16 @@ Affiche les élément contenu dans les cards.
 
 Le composant `GradienTagButton` affiche les bouttons avec le nom des couleurs contenu dans les pastilles.  
 Lors d'un clique, affiche toutes les **cards** contenant cette couleur et le bouton se désactive.
-![Cards](src/images/Card.png)  
-Le composant `FullScreenButton` est un bouton qui redige vers une autre page.  
-Sur cette autre page, la couleur sélectionné sera affiché en plein écran avec son nom et son code couleur.
-![FullScreen](src/images/fullscreen.png)
 
-## GradientSelect
+![Cards](src/images/Card.png)
 
-```js
-// components/GradientSelect.tsx
+Le composant `FullScreenButton` est un bouton qui redige vers le composant `FullScreenPage`.  
+La couleur sélectionné sera affiché en plein écran avec son nom et son code couleur.
 
-const GradientSelect: React.FC = () => {
+Sur cette autre page, on aura aussi 3 boutons:
 
-  const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
-  const dispatch = useDispatch<AppDispatch>();
-  const uniqueTags: string[] = allTags(data);
+- **Home**: pour retourner sur la page d'acceuil
+- **Next**: pour sélectionner le dégradé suivant
+- **Previous**: pour sélectionner le dégradé précédent
 
-  return (
-    <div className="flex justify-center items-center ">
-      <label
-        className="border-2 text-xl bg-gray-200 p-2 rounded-l-md"
-        htmlFor="select"
-      >
-        Filtre
-      </label>
-      <select
-        className="rounded-r-md p-3 outline-none w-full bg-white border xl:w-3/6"
-        onChange={(e) => dispatch(setFilter(e.target.value))}
-        id="select"
-      >
-        <option value="All">Tous</option>
-        {uniqueTags.map((el) => (
-          <option key={el}>{el}</option>
-        ))}
-      </select>
-    </div>
-  );
-};
-```
-
-Itération sur le tableau de tags de couleur puis affichage dans le form-select.
-
-![Form-Select](src/images/Form-Select.png)
-
-## GradientHeader
-
-```js
-// components/GradientHeader.tsx
-
-interface ChangeColor {
-  style: {};
-  handleReloadClick: () => void;
-  handleNextClick: () => void;
-  handlePrevClick: () => void;
-}
-
-const GradientHeader: React.FC<ChangeColor> = ({
-  style,
-  handleReloadClick,
-  handleNextClick,
-  handlePrevClick,
-}) => {
-  return (
-    <div className="text-center text-white py-10 w-full" style={style}>
-      <h1 className="text-5xl md:text-6xl lg:text-7xl pb-2">Gradient</h1>
-      <p className="sm:text-xl md:text-2xl lg:text-3xl">
-        Ultime collection de dégradés
-      </p>
-      <div className="pt-4">
-        <button
-          className="border-white border w-10 h-10 mr-2 rounded"
-          onClick={handlePrevClick}
-        >
-          <img src={arrowLeft} alt="fleche gauche" className="m-auto" />
-        </button>
-        <button
-          className="border-white border w-10 h-10 mr-2 rounded"
-          onClick={handleReloadClick}
-        >
-          <img src={ClockWise} alt="fleche random" className="m-auto" />
-        </button>
-        <button
-          className="border-white border w-10 h-10 rounded"
-          onClick={handleNextClick}
-        >
-          <img src={arrowRight} alt="fleche droite" className="m-auto" />
-        </button>
-      </div>
-    </div>
-  );
-};
-```
-
-![Header](src/images/header.png)
+  ![FullScreen](src/images/fullscreen.png)
