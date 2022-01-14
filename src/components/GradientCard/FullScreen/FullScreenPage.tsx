@@ -11,19 +11,23 @@ import {
 import Loading from "../Loading";
 
 const FullScreenPage: React.FC = () => {
+  const dispatch = useDispatch();
   const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
   const loading = useSelector(
     (state: RootState) => state.loadDataSlice.loading
   );
+
   const { id } = useParams() as any;
+
   const style = {
     backgroundImage: `linear-gradient(to right, ${data[id - 1]?.start}, ${
       data[id - 1]?.end
     })`,
   };
-  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setLoading(loading));
+
     const fetchData = async () => {
       try {
         const result = await axios.get(
@@ -34,6 +38,7 @@ const FullScreenPage: React.FC = () => {
         dispatch(setError(error.message));
       }
     };
+
     fetchData();
   }, [dispatch, loading]);
 
@@ -42,7 +47,7 @@ const FullScreenPage: React.FC = () => {
       {loading ? (
         <Loading />
       ) : id < 26 ? (
-        <div style={style} className=" h-screen ">
+        <div style={style} className="h-screen">
           <button className="bg-black text-white px-3 py-1 mr-1 rounded m-2">
             <Link to="/">Home</Link>
           </button>

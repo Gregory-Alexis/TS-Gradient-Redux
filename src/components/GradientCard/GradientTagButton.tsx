@@ -16,7 +16,7 @@ const GradientTagButton: React.FC<Props> = ({ tags }) => {
         <button
           className={`${
             filter === el ? "bg-gray-400" : "bg-black text-white"
-          } rounded px-2 py-1 mt-3 `}
+          } rounded px-2 py-1 mt-3`}
           value={filter}
           onClick={() => dispatch(setFilter(el))}
           key={el}

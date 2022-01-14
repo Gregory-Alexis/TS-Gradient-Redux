@@ -9,7 +9,7 @@ const FullScreenButton: React.FC<Props> = ({ id }) => {
     <NavLink to={`/gradient/${id}`}>
       <button
         type="button"
-        className="w-full border border-black rounded text-center mt-3 p-1"
+        className="w-full border border-black text-center rounded mt-3 p-1"
       >
         Full Screen
       </button>

@@ -5,7 +5,7 @@ interface Props {
 
 const GradientCode: React.FC<Props> = ({ colorStart, colorEnd }) => {
   return (
-    <code className="text-gray-500 text-sm flex text-center">{`backgroundImage: linear-gradient(to right, ${colorStart}, ${colorEnd})`}</code>
+    <code className="flex text-center text-gray-500 text-sm">{`backgroundImage: linear-gradient(to right, ${colorStart}, ${colorEnd})`}</code>
   );
 };
 
