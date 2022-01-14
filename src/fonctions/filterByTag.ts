@@ -1,6 +1,6 @@
-export const filterByTag = (data: [], filter: string, value: string) => {
+export const filterByTag = (data: [], filter: string, a: string) => {
   const list = data.filter((el: any) => {
-    if (filter === value) {
+    if (filter === a) {
       return true;
     }
     return el.tags.includes(filter);
