@@ -145,10 +145,10 @@ Export de l'action et du reducer
 ```js
 // functions/alltags.ts
 
-const allTags = (list: any[]) => {
+const allTags = (array: any[]) => {
   let listTag: string[] = [];
-  for (let element of list) {
-    if (list.includes(element)) {
+  for (let element of array) {
+    if (array.includes(element)) {
       listTag = listTag.concat(element.tags);
     }
   }
@@ -166,7 +166,7 @@ export default allTags;
 
 Création d'une fonction `allTags` qui prend en paramètre un tableau.
 
-Itération sur le tableau `list`.
+Itération sur le tableau `array`.
 Récupèration de tout les tags de ce tableau pour chaque élément.
 
 On applique ensuite au tableau `listTag` le méthode `concat` pour chaque tag.
