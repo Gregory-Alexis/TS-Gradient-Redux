@@ -32,7 +32,7 @@ const GradientHeader: React.FC<ChangeColor> = ({
           className="border-white border w-10 h-10 mr-2 rounded"
           onClick={handleReloadClick}
         >
-          <img src={ClockWise} alt="fleche random" className="m-auto" />
+          <img src={ClockWise} alt="fleche aléatoire" className="m-auto" />
         </button>
         <button
           className="border-white border w-10 h-10 rounded"
