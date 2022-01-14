@@ -6,7 +6,7 @@
 
 ## Description
 
-Site listant différent gradients de couleur
+Site listant différent gradients de couleur avec un extrait et leur code couleur.
 
 ## Installation
 
@@ -162,6 +162,8 @@ On applique ensuite la méthode `push` à `uniqueTagList` seulement s'il ne cont
 
 On se retrouve donc avec un tableau composé de chaque couleurs.
 
+![allTags](src/images/consolelog.png)
+
 ## **filterByTags**
 
 ```js
@@ -265,8 +267,8 @@ Gestion du chargement de la page et des éventuelles erreurs.
 
 Initialisation de le fonction **ChooseGradient** qui permet de récupérer un nombre aléatoire entre 0 et le nombre d'élément contenu dans data.
 
-La variable `randomGradient` à pour valeur initial `chooseGradient` ( un nombre aléatoire ).
-Chaque fois que la page sera mise à jour ou qu'on cliquera sur le boutton, une couleur sera affiché, grâce à la fonction `handleReloadClick`, en tant que **backgroundColor** dans le Header qui dépendra du numéro aléatoire.
+La variable `randomGradient` à pour valeur initial `chooseGradient` ( un nombre aléatoire ).  
+Chaque fois que la page sera mise à jour ou qu'on clique sur le boutton, une couleur sera affiché ( **_grâce à la fonction `handleReloadClick`_** ) en tant que **backgroundColor** du Header qui dépendra du numéro aléatoire.
 
 Les fonctions `handleNextClick` et `handlePreviousClick` permettent de choisir respectivement la couleur suivante ou précédente.
 
@@ -334,3 +336,99 @@ const GradientCardList: React.FC<Elem> = ({
 ```
 
 Affiche les élément contenu dans les cards.
+
+Le composant `GradienTagButton` affiche les bouttons avec le nom des couleurs contenu dans les pastilles.  
+Lors d'un clique, affiche toutes les **cards** contenant cette couleur et le bouton se désactive.
+![Cards](src/images/Card.png)  
+Le composant `FullScreenButton` est un bouton qui redige vers une autre page.  
+Sur cette autre page, la couleur sélectionné sera affiché en plein écran avec son nom et son code couleur.
+![FullScreen](src/images/fullscreen.png)
+
+## GradientSelect
+
+```js
+// components/GradientSelect.tsx
+
+const GradientSelect: React.FC = () => {
+
+  const data = useSelector((state: RootStateOrAny) => state.loadDataSlice.data);
+  const dispatch = useDispatch<AppDispatch>();
+  const uniqueTags: string[] = allTags(data);
+
+  return (
+    <div className="flex justify-center items-center ">
+      <label
+        className="border-2 text-xl bg-gray-200 p-2 rounded-l-md"
+        htmlFor="select"
+      >
+        Filtre
+      </label>
+      <select
+        className="rounded-r-md p-3 outline-none w-full bg-white border xl:w-3/6"
+        onChange={(e) => dispatch(setFilter(e.target.value))}
+        id="select"
+      >
+        <option value="All">Tous</option>
+        {uniqueTags.map((el) => (
+          <option key={el}>{el}</option>
+        ))}
+      </select>
+    </div>
+  );
+};
+```
+
+Itération sur le tableau de tags de couleur puis affichage dans le form-select.
+
+![Form-Select](src/images/Form-Select.png)
+
+## GradientHeader
+
+```js
+// components/GradientHeader.tsx
+
+interface ChangeColor {
+  style: {};
+  handleReloadClick: () => void;
+  handleNextClick: () => void;
+  handlePrevClick: () => void;
+}
+
+const GradientHeader: React.FC<ChangeColor> = ({
+  style,
+  handleReloadClick,
+  handleNextClick,
+  handlePrevClick,
+}) => {
+  return (
+    <div className="text-center text-white py-10 w-full" style={style}>
+      <h1 className="text-5xl md:text-6xl lg:text-7xl pb-2">Gradient</h1>
+      <p className="sm:text-xl md:text-2xl lg:text-3xl">
+        Ultime collection de dégradés
+      </p>
+      <div className="pt-4">
+        <button
+          className="border-white border w-10 h-10 mr-2 rounded"
+          onClick={handlePrevClick}
+        >
+          <img src={arrowLeft} alt="fleche gauche" className="m-auto" />
+        </button>
+        <button
+          className="border-white border w-10 h-10 mr-2 rounded"
+          onClick={handleReloadClick}
+        >
+          <img src={ClockWise} alt="fleche random" className="m-auto" />
+        </button>
+        <button
+          className="border-white border w-10 h-10 rounded"
+          onClick={handleNextClick}
+        >
+          <img src={arrowRight} alt="fleche droite" className="m-auto" />
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+![Header](src/images/header.png)
