@@ -38,7 +38,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-Mise en place du store
+Mise en place du store avec `configureStore`
 
 ## Slice
 
@@ -85,7 +85,7 @@ export const { setData, setLoading, setError } = dataSlice.actions;
 export default dataSlice.reducer;
 ```
 
-Mise en place des différentes actions:
+Mise en place des différentes actions avec `createSlice`
 
 - **setData** fetch les données
 - **setLoading** Indique que la page est entrain de charger
