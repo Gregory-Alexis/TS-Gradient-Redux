@@ -38,6 +38,8 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
+Mise en place du store
+
 ## Slice
 
 ### **dataSlice**
@@ -149,10 +151,10 @@ export default allTags;
 Création d'une fonction `allTags` qui prend en paramètre un tableau.
 
 Itération sur le tableau `list`.
-Récupèration de tout les tags du tableau `list` pour chaque élément.
+Récupèration de tout les tags de ce tableau pour chaque élément.
 
 On applique ensuite au tableau `listTag` le méthode `concat`.
-Les tags sont contenu dans des tableaux. En appliquant cette méthode, on récupère tout les tags dans un seul et même tableau
+Les tags sont contenu dans des tableaux, donc appliquant cette méthode, on récupère tout les tags dans un seul et même tableau
 
 Le tableau `uniqueTagList` sera un tableau qui contiendra chaque couleurs en 1 exemplaire.
 Pour ce faire, on itérera sur `listTag` avec une boucle.
@@ -176,7 +178,7 @@ export const filterByTag = (data: [], filter: string, value: string) => {
 };
 ```
 
-Cette fonction prend en paramètre un **tableau** `data`, notre **filtre** créé avec redux qui a pour valeur initial `All` et une **valeur** `All`.
+Cette fonction prend en paramètre un **tableau** `data`, notre **filtre** créé avec redux qui a pour valeur initial `All` et une **valeur** `All`.  
 Elle permett de retourner tout les tags si le filtre est égale à la valeur ( si **All** === **All** ).  
 Sinon, on retourne le tag de couleur qui correspond à l'élément sur lequel on a cliqué ( si on clique sur vert, seul les gradients composé de vert seront affiché ).
 
@@ -185,6 +187,8 @@ Sinon, on retourne le tag de couleur qui correspond à l'élément sur lequel on
 ## App
 
 ```js
+//components/App.tsx
+
 const App = () => {
   const loading = useSelector(
     (state: RootState) => state.loadDataSlice.loading
@@ -266,6 +270,8 @@ Chaque fois que la page sera mise à jour ou qu'on cliquera sur le boutton, une 
 
 Les fonctions `handleNextClick` et `handlePreviousClick` permettent de choisir respectivement la couleur suivante ou précédente.
 
+Initialisation des variable **data** et **filter** auxquelles sont affecté une fonction ( `Selector` ) qui prend en paramètre leur state initial respectif déclarer dans redux.
+
 ## GradientCard
 
 ```js
@@ -293,8 +299,6 @@ const GradientCard: React.FC = () => {
   );
 };
 ```
-
-Initialisation des variable **data** et **filter** auxquelles est affecté une fonction ( `Selector` ) qui prend en paramètre leur state initial déclarer dans redux.
 
 ## GradientCardList
 
