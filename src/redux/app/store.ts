@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import dataSlice from "../features/data/dataSlice";
 import filterTagSlice from "../features/filterTag/filterTagSlice";
 
