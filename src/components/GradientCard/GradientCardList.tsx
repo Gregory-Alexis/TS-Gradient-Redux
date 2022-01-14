@@ -21,7 +21,7 @@ const GradientCardList: React.FC<Elem> = ({
 }) => {
   return (
     <div>
-      <GradientPill colorStart={colorStart} colorEnd={colorEnd} />
+      <GradientPill colorEnd={colorEnd} colorStart={colorStart} />
       <GradientName name={name} />
       <GradientCode colorStart={colorStart} colorEnd={colorEnd} />
       <GradientTagButton tags={tags} />
