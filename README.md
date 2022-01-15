@@ -3,6 +3,7 @@
 ![](https://img.shields.io/badge/React-17.0.2-blue)
 ![](https://img.shields.io/badge/TypeScript-v4.5.2-blue)
 ![](https://img.shields.io/badge/Redux-4.1.2-blueviolet)
+![](https://img.shields.io/badge/Tailwind-3.0.13-blue)
 
 ## Description
 
