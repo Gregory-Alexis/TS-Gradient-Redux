@@ -5,9 +5,15 @@
 ![](https://img.shields.io/badge/Redux-4.1.2-blueviolet)
 ![](https://img.shields.io/badge/Tailwind-3.0.13-blue)
 
+# cra-template-redux-typescript
+
+```
+npx create-react-app my-app --template redux-typescript
+```
+
 ## Description
 
-Site listant différent gradients de couleur avec un extrait et leur code couleur.
+Site de différent gradients avec un extrait et leur code couleur.
 
 - [Installation](https://github.com/Westindiess/TS-Gradient-Redux#installation)
 - [Redux](https://github.com/Westindiess/TS-Gradient-Redux#redux)
@@ -171,7 +177,7 @@ Itération sur le tableau `array`.
 Récupèration de tout les tags de ce tableau pour chaque élément.
 
 On applique ensuite au tableau `listTag` le méthode `concat` pour chaque tag.
-Les tags sont contenu dans des tableaux, donc en appliquant cette méthode, on récupère tout les tags dans un seul et même tableau
+Ils sont contenu dans des tableaux, donc en appliquant cette méthode, on les récupère tous dans un seul et même tableau.
 
 Le tableau `uniqueTagList` sera un tableau qui contiendra chaque couleurs en 1 fois.
 Pour ce faire, on itérera sur `listTag` avec une boucle.
